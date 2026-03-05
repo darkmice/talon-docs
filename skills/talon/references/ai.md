@@ -1,19 +1,23 @@
-# AI Engine
+# AI Engine (Commercial — requires `talon-ai`)
 
 Native Session, Context, Memory, RAG, Agent, Trace, Intent, and Embedding Cache abstractions for LLM applications.
 
+> ⚠️ **Commercial License**: The AI Engine is distributed as a pre-compiled library (`talon-ai`) and requires a valid subscription.
+> No source code is provided. Obtain from https://releases.talon.dev/ or via private Cargo registry.
+
 ## Overview
 
-The AI Engine is Talon's 9th engine — a first-class semantic abstraction layer purpose-built for LLM application development. It eliminates the need for external frameworks (LangChain, LlamaIndex) by providing native primitives for session management, conversation context, semantic memory, RAG document management, agent orchestration, execution tracing, intent recognition, and embedding caching.
+The AI Engine is Talon’s commercial extension — a first-class semantic abstraction layer purpose-built for LLM application development. It is distributed as a separate `talon-ai` crate (pre-compiled, no source code) that injects AI capabilities into Talon via the `TalonAiExt` extension trait. It eliminates the need for external frameworks (LangChain, LlamaIndex) by providing native primitives for session management, conversation context, semantic memory, RAG document management, agent orchestration, execution tracing, intent recognition, and embedding caching.
 
 ## Quick Start
 
 ```rust
-use talon::{Talon, ContextMessage};
+use talon::Talon;
+use talon_ai::TalonAiExt;  // Commercial extension trait
 use std::collections::BTreeMap;
 
 let db = Talon::open("./data")?;
-let ai = db.ai()?;
+let ai = db.ai()?;  // Injected by TalonAiExt
 
 // Create a session
 ai.create_session("chat-001", BTreeMap::new(), None)?;
@@ -424,7 +428,16 @@ Routes natural language queries to the appropriate engine.
 
 ## Accessing the AI Engine
 
+```toml
+# Cargo.toml— add talon-ai from private registry (pre-compiled)
+[dependencies]
+talon = "0.1"
+talon-ai = { version = "0.1", registry = "talon-ai" }
+```
+
 ```rust
+use talon_ai::TalonAiExt;
+
 // Write mode (Replica nodes return Error::ReadOnly)
 let ai = db.ai()?;
 

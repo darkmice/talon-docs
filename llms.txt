@@ -1,7 +1,7 @@
 # Talon
 
 > AI-Native Multi-Model Data Engine
-> 9 engines in one binary: SQL · KV · TimeSeries · MQ · Vector · FTS · GEO · Graph · AI
+> 8 open-source engines + AI extension (commercial): SQL · KV · TimeSeries · MQ · Vector · FTS · GEO · Graph
 > Single binary, zero dependencies, embedded + server dual-mode
 
 ## Docs
@@ -15,6 +15,6 @@
 - [FTS Engine](https://docs.talon.dev/engines/full-text-search): BM25 + ES-compatible queries
 - [GEO Engine](https://docs.talon.dev/engines/geo): Geohash spatial indexing
 - [Graph Engine](https://docs.talon.dev/engines/graph): Property graph with BFS/DFS/PageRank
-- [AI Engine](https://docs.talon.dev/engines/ai): Session/Context/Memory/RAG/Agent/Trace
+- [AI Engine](https://docs.talon.dev/engines/ai): Session/Context/Memory/RAG/Agent/Trace (commercial, via talon-ai crate)
 - [Fusion Queries](https://docs.talon.dev/engines/fusion-queries): Cross-engine combinations
 - [Full API Reference](https://docs.talon.dev/llms-full.txt): Complete API signatures

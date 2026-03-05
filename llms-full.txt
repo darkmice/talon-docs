@@ -177,10 +177,14 @@ graph.vertex_count(graph) / graph.edge_count(graph)
 Direction: Out, In, Both
 ```
 
-## AI Engine
+## AI Engine (Commercial — requires `talon-ai` crate)
+
+> AI Engine is available as a separate commercial crate `talon-ai` (precompiled, no source code).
+> Obtain via private registry or platform-specific binary download (requires subscription).
 
 ```rust
-db.ai()? -> AiEngine (write)    db.ai_read()? -> AiEngine (read-only)
+use talon_ai::TalonAiExt; // Extension trait
+let ai = db.ai()?; // Injects via trait
 
 // Session
 ai.create_session(id, metadata: BTreeMap, ttl_secs?) -> ()

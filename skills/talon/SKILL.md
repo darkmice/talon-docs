@@ -5,7 +5,8 @@ description: "Talon 多模融合数据引擎使用指南。当用户需要使用
 
 # Talon 使用指南
 
-Talon 是面向 AI 应用的多模融合数据引擎，单二进制、零外部依赖，提供 9 大引擎：SQL、KV、Vector、TimeSeries、MessageQueue、Full-Text Search、GEO、Graph、AI。
+Talon 是面向 AI 应用的多模融合数据引擎，单二进制、零外部依赖，提供 8 大开源引擎：SQL、KV、Vector、TimeSeries、MessageQueue、Full-Text Search、GEO、Graph。
+AI 引擎通过商业授权的 `talon-ai` 预编译库提供（不含源码）。
 
 ## 连接
 
@@ -23,7 +24,7 @@ let db = Talon::open("./data")?;  // 嵌入式模式，数据目录
 | 结构化数据 CRUD、JOIN、聚合 | SQL | `db.run_sql()` |
 | 缓存、会话 token、分布式锁 | KV | `db.kv()` / Redis 协议 |
 | embedding 相似搜索、RAG 检索 | Vector | `db.vector()` / SQL `vec_cosine()` |
-| 对话管理、Agent 状态、记忆 | AI | `db.ai()` |
+| 对话管理、Agent 状态、记忆 | AI (商业) | `db.ai()` (需 talon-ai) |
 | 监控指标、token 用量追踪 | TimeSeries | `db.create_timeseries()` |
 | 异步任务、事件驱动 | MQ | `db.mq()` |
 | 关键词搜索、BM25 排序 | FTS | `db.fts()` |
@@ -55,8 +56,10 @@ let ve = db.vector("idx")?;
 let hits = ve.search(&query_vec, 10, "cosine")?;      // (id, score)
 ```
 
-### AI (Session / Memory / RAG)
+### AI (Session / Memory / RAG) — 需要 talon-ai 预编译库
 ```rust
+use talon_ai::TalonAiExt; // 商业授权预编译库
+
 let ai = db.ai()?;
 ai.create_session("chat-1", BTreeMap::new(), None)?;
 ai.append_message("chat-1", &ContextMessage { role: "user".into(), content: "Hi".into(), token_count: Some(1) })?;
@@ -88,7 +91,7 @@ let hits = graph_vector_search(&store, &GraphVectorQuery {
 - **SQL 引擎** (DDL/DML/函数/窗口/CTE/事务): [references/sql.md](references/sql.md)
 - **KV 引擎** (CRUD/TTL/计数器/扫描/快照): [references/kv.md](references/kv.md)
 - **Vector 引擎** (HNSW/metadata filter/量化/recommend/discover): [references/vector.md](references/vector.md)
-- **AI 引擎** (Session/Context/Memory/RAG/Agent/Trace/Intent): [references/ai.md](references/ai.md)
+- **AI 引擎** (Session/Context/Memory/RAG/Agent/Trace/Intent) — 商业授权: [references/ai.md](references/ai.md)
 - **其他引擎** (TS/MQ/FTS/GEO/Graph/Fusion): [references/more-engines.md](references/more-engines.md)
 - **多语言 SDK** (Go/Python/Node.js/Java/.NET): [references/sdk.md](references/sdk.md)
 

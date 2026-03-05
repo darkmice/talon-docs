@@ -2,8 +2,9 @@
 
 **AI-Native Multi-Model Data Engine** — Official documentation site.
 
-SQL + KV + TimeSeries + MessageQueue + Vector + Full-Text Search + GEO + Graph + AI
-— all in a single binary with zero external dependencies.
+SQL + KV + TimeSeries + MessageQueue + Vector + Full-Text Search + GEO + Graph
+— 8 open-source engines in a single binary with zero external dependencies.
+— AI Engine available as commercial extension via [talon-ai](https://gitlab.com/darkmice/talon-ai).
 
 ## Links
 
@@ -28,7 +29,7 @@ This repository includes Talon usage skills for major AI coding tools. Clone thi
 | Agent | `.agent/skills/talon/` |
 | npx-compatible | `skills/talon/` |
 
-Each skill covers: SQL, KV, Vector, AI engine, SDK usage, and more.
+Each skill covers: SQL, KV, Vector, AI engine (via talon-ai), SDK usage, and more.
 
 ## Build
 
