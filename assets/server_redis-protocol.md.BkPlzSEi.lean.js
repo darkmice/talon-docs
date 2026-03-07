@@ -1,1 +1,7 @@
+/*
+ * Copyright (c) 2026 Talon Contributors
+ * Author: dark.lijin@gmail.com
+ * Licensed under the Talon Community Dual License Agreement.
+ * See the LICENSE file in the project root for full license information.
+ */
 import{_ as a,o as i,c as n,ag as e}from"./chunks/framework.BwE_uGt8.js";const c=JSON.parse('{"title":"Redis Protocol (RESP)","description":"","frontmatter":{},"headers":[],"relativePath":"server/redis-protocol.md","filePath":"server/redis-protocol.md"}'),p={name:"server/redis-protocol.md"};function l(t,s,h,k,r,o){return i(),n("div",null,[...s[0]||(s[0]=[e("",17)])])}const F=a(p,[["render",l]]);export{c as __pageData,F as default};

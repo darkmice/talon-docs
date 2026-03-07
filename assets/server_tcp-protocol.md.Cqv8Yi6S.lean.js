@@ -1,1 +1,7 @@
+/*
+ * Copyright (c) 2026 Talon Contributors
+ * Author: dark.lijin@gmail.com
+ * Licensed under the Talon Community Dual License Agreement.
+ * See the LICENSE file in the project root for full license information.
+ */
 import{_ as a,o as i,c as t,ag as e}from"./chunks/framework.BwE_uGt8.js";const c=JSON.parse('{"title":"TCP Protocol","description":"","frontmatter":{},"headers":[],"relativePath":"server/tcp-protocol.md","filePath":"server/tcp-protocol.md"}'),n={name:"server/tcp-protocol.md"};function l(p,s,o,h,r,k){return i(),t("div",null,[...s[0]||(s[0]=[e("",14)])])}const g=a(n,[["render",l]]);export{c as __pageData,g as default};

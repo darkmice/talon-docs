@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2026 Talon Contributors
+ * Author: dark.lijin@gmail.com
+ * Licensed under the Talon Community Dual License Agreement.
+ * See the LICENSE file in the project root for full license information.
+ */
 import{_ as s,o as t,c as e,ag as o}from"./chunks/framework.BwE_uGt8.js";const c=JSON.parse('{"title":"HTTP API","description":"","frontmatter":{},"headers":[],"relativePath":"server/http-api.md","filePath":"server/http-api.md"}'),n={name:"server/http-api.md"};function i(p,a,u,l,q,h){return t(),e("div",null,[...a[0]||(a[0]=[o(`<h1 id="http-api" tabindex="-1">HTTP API <a class="header-anchor" href="#http-api" aria-label="Permalink to &quot;HTTP API&quot;">​</a></h1><p>Talon Server exposes a RESTful HTTP API for all 9 engines.</p><h2 id="base-url" tabindex="-1">Base URL <a class="header-anchor" href="#base-url" aria-label="Permalink to &quot;Base URL&quot;">​</a></h2><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span>http://localhost:8080</span></span></code></pre></div><h2 id="endpoints" tabindex="-1">Endpoints <a class="header-anchor" href="#endpoints" aria-label="Permalink to &quot;Endpoints&quot;">​</a></h2><h3 id="sql" tabindex="-1">SQL <a class="header-anchor" href="#sql" aria-label="Permalink to &quot;SQL&quot;">​</a></h3><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span>POST /api/sql</span></span>
 <span class="line"><span>Content-Type: application/json</span></span>
 <span class="line"><span></span></span>

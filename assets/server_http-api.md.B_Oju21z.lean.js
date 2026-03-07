@@ -1,1 +1,7 @@
+/*
+ * Copyright (c) 2026 Talon Contributors
+ * Author: dark.lijin@gmail.com
+ * Licensed under the Talon Community Dual License Agreement.
+ * See the LICENSE file in the project root for full license information.
+ */
 import{_ as s,o as t,c as e,ag as o}from"./chunks/framework.BwE_uGt8.js";const c=JSON.parse('{"title":"HTTP API","description":"","frontmatter":{},"headers":[],"relativePath":"server/http-api.md","filePath":"server/http-api.md"}'),n={name:"server/http-api.md"};function i(p,a,u,l,q,h){return t(),e("div",null,[...a[0]||(a[0]=[o("",32)])])}const d=s(n,[["render",i]]);export{c as __pageData,d as default};

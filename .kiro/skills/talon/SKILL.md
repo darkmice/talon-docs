@@ -11,6 +11,7 @@ Talon 是面向 AI 应用的多模融合数据引擎，单二进制、零外部�
 
 ```rust
 use talon::Talon;
+use talon_ai::TalonAiExt;
 let db = Talon::open("./data")?;  // 嵌入式模式，数据目录
 ```
 

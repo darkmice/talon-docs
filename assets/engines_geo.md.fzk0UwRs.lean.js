@@ -1,1 +1,7 @@
+/*
+ * Copyright (c) 2026 Talon Contributors
+ * Author: dark.lijin@gmail.com
+ * Licensed under the Talon Community Dual License Agreement.
+ * See the LICENSE file in the project root for full license information.
+ */
 import{_ as i,o as a,c as h,ag as t}from"./chunks/framework.BwE_uGt8.js";const g=JSON.parse('{"title":"GEO Engine","description":"","frontmatter":{},"headers":[],"relativePath":"engines/geo.md","filePath":"engines/geo.md"}'),n={name:"engines/geo.md"};function k(e,s,l,p,d,r){return a(),h("div",null,[...s[0]||(s[0]=[t("",77)])])}const o=i(n,[["render",k]]);export{g as __pageData,o as default};

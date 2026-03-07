@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2026 Talon Contributors
+ * Author: dark.lijin@gmail.com
+ * Licensed under the Talon Community Dual License Agreement.
+ * See the LICENSE file in the project root for full license information.
+ */
 import{_ as i,o as a,c as n,ag as p}from"./chunks/framework.BwE_uGt8.js";const g=JSON.parse('{"title":"OpenAPI 规范","description":"","frontmatter":{},"headers":[],"relativePath":"zh/ai/openapi.md","filePath":"zh/ai/openapi.md"}'),l={name:"zh/ai/openapi.md"};function h(t,s,e,k,E,r){return a(),n("div",null,[...s[0]||(s[0]=[p(`<h1 id="openapi-规范" tabindex="-1">OpenAPI 规范 <a class="header-anchor" href="#openapi-规范" aria-label="Permalink to &quot;OpenAPI 规范&quot;">​</a></h1><p>Talon 的 HTTP API 可使用 OpenAPI 3.0 规范描述，用于集成 API 工具、代码生成器和 AI Agent。</p><h2 id="状态" tabindex="-1">状态 <a class="header-anchor" href="#状态" aria-label="Permalink to &quot;状态&quot;">​</a></h2><blockquote><p>OpenAPI YAML 规范计划在未来版本中发布。HTTP API 端点已在 <a href="/talon-docs/zh/server/http-api.html">HTTP API</a> 中文档化。</p></blockquote><h2 id="与-ai-agent-集成" tabindex="-1">与 AI Agent 集成 <a class="header-anchor" href="#与-ai-agent-集成" aria-label="Permalink to &quot;与 AI Agent 集成&quot;">​</a></h2><p>支持 OpenAPI/函数调用的 AI Agent 可使用规范自动发现并调用 Talon HTTP 端点。</p><div class="language-yaml vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">yaml</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># OpenAPI 片段示例（计划中）</span></span>
 <span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">openapi</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">3.0.0</span></span>
 <span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">info</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>

@@ -1,1 +1,7 @@
+/*
+ * Copyright (c) 2026 Talon Contributors
+ * Author: dark.lijin@gmail.com
+ * Licensed under the Talon Community Dual License Agreement.
+ * See the LICENSE file in the project root for full license information.
+ */
 import{_ as i,o as a,c as n,ag as t}from"./chunks/framework.BwE_uGt8.js";const E=JSON.parse('{"title":"AI-Consumable Documentation","description":"","frontmatter":{},"headers":[],"relativePath":"ai/overview.md","filePath":"ai/overview.md"}'),l={name:"ai/overview.md"};function e(h,s,p,k,r,d){return a(),n("div",null,[...s[0]||(s[0]=[t("",17)])])}const g=i(l,[["render",e]]);export{E as __pageData,g as default};

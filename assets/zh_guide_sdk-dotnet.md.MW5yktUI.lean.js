@@ -1,1 +1,7 @@
+/*
+ * Copyright (c) 2026 Talon Contributors
+ * Author: dark.lijin@gmail.com
+ * Licensed under the Talon Community Dual License Agreement.
+ * See the LICENSE file in the project root for full license information.
+ */
 import{_ as i,o as a,c as h,ag as k}from"./chunks/framework.BwE_uGt8.js";const g=JSON.parse('{"title":".NET SDK","description":"","frontmatter":{},"headers":[],"relativePath":"zh/guide/sdk-dotnet.md","filePath":"zh/guide/sdk-dotnet.md"}'),t={name:"zh/guide/sdk-dotnet.md"};function n(l,s,p,e,E,r){return a(),h("div",null,[...s[0]||(s[0]=[k("",22)])])}const F=i(t,[["render",n]]);export{g as __pageData,F as default};

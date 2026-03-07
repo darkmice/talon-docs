@@ -1,1 +1,7 @@
+/*
+ * Copyright (c) 2026 Talon Contributors
+ * Author: dark.lijin@gmail.com
+ * Licensed under the Talon Community Dual License Agreement.
+ * See the LICENSE file in the project root for full license information.
+ */
 import{_ as i,o as a,c as h,ag as k}from"./chunks/framework.BwE_uGt8.js";const g=JSON.parse('{"title":"AI 引擎","description":"","frontmatter":{},"headers":[],"relativePath":"zh/engines/ai.md","filePath":"zh/engines/ai.md"}'),t={name:"zh/engines/ai.md"};function n(l,s,p,e,E,r){return a(),h("div",null,[...s[0]||(s[0]=[k("",68)])])}const y=i(t,[["render",n]]);export{g as __pageData,y as default};

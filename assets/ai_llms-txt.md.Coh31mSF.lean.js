@@ -1,1 +1,7 @@
+/*
+ * Copyright (c) 2026 Talon Contributors
+ * Author: dark.lijin@gmail.com
+ * Licensed under the Talon Community Dual License Agreement.
+ * See the LICENSE file in the project root for full license information.
+ */
 import{_ as s,o as a,c as e,ag as l}from"./chunks/framework.BwE_uGt8.js";const m=JSON.parse('{"title":"llms.txt","description":"","frontmatter":{},"headers":[],"relativePath":"ai/llms-txt.md","filePath":"ai/llms-txt.md"}'),i={name:"ai/llms-txt.md"};function n(o,t,r,d,p,h){return a(),e("div",null,[...t[0]||(t[0]=[l("",10)])])}const u=s(i,[["render",n]]);export{m as __pageData,u as default};

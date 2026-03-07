@@ -4,12 +4,12 @@
 
 SQL + KV + TimeSeries + MessageQueue + Vector + Full-Text Search + GEO + Graph
 — 8 open-source engines in a single binary with zero external dependencies.
-— AI Engine available as commercial extension via [talon-ai](https://gitlab.com/darkmice/talon-ai).
+— AI Engine available as commercial extension via [talon-ai](https://github.com/darkmice/talon-ai).
 
 ## Links
 
 - **Documentation**: [https://darkmice.github.io/talon-docs/](https://darkmice.github.io/talon-docs/)
-- **Source Code**: [github.com/darkmice/talon](https://github.com/darkmice/talon)
+- **Source Code**: [github.com/darkmice/talon-core](https://github.com/darkmice/talon-core)
 - **SDK**: [github.com/darkmice/talon-sdk](https://github.com/darkmice/talon-sdk)
 
 ## AI Coding Skills
@@ -33,7 +33,7 @@ Each skill covers: SQL, KV, Vector, AI engine (via talon-ai), SDK usage, and mor
 
 ## Build
 
-Documentation is built from [packages/docs](https://github.com/darkmice/talon/tree/main/packages/docs) in the main Talon repo and auto-published via GitHub Actions.
+Documentation is built from [packages/docs](https://github.com/darkmice/talon-core/tree/main/packages/docs) in the main Talon repo and auto-published via GitHub Actions.
 
 ## License
 

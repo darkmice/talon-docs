@@ -10,6 +10,7 @@ The AI Engine is Talon's 9th engine — a first-class semantic abstraction layer
 
 ```rust
 use talon::{Talon, ContextMessage};
+use talon_ai::TalonAiExt;
 use std::collections::BTreeMap;
 
 let db = Talon::open("./data")?;
