@@ -77,7 +77,14 @@ bfs, _ := db.GraphBFS("social", v1, 3, "out")
 db.AiCreateSession("s1", nil, nil)
 db.AiAppendMessage("s1", map[string]interface{}{"role": "user", "content": "Hi"})
 history, _ := db.AiGetHistory("s1", nil)
-db.AiStoreMemory("s1", map[string]interface{}{"key": "pref", "value": "dark"})
+
+// AI v2.1 — Hybrid Memory
+db.AiSetLlmConfig(map[string]interface{}{
+    "chat":  map[string]interface{}{"base_url": "https://api.openai.com/v1", "api_key": "sk-...", "model": "gpt-4o-mini"},
+    "embed": map[string]interface{}{"base_url": "https://api.openai.com/v1", "api_key": "sk-...", "model": "text-embedding-3-small", "dimensions": 1536},
+})
+db.AiAddMemory("Alice prefers dark mode", nil, nil, false)
+results, _ := db.AiRecall("What does Alice prefer?", 5, 0.4, 0.6, 0.3, false, 0, 1)
 
 // Ops
 stats, _ := db.DatabaseStats()
@@ -149,6 +156,14 @@ db.ai_create_session("s1")
 db.ai_append_message("s1", {"role": "user", "content": "Hi"})
 history = db.ai_get_history("s1")
 
+# AI v2.1 — Hybrid Memory
+db.ai_set_llm_config({
+    "chat":  {"base_url": "https://api.openai.com/v1", "api_key": "sk-...", "model": "gpt-4o-mini"},
+    "embed": {"base_url": "https://api.openai.com/v1", "api_key": "sk-...", "model": "text-embedding-3-small", "dimensions": 1536},
+})
+db.ai_add_memory("Alice prefers dark mode")
+results = db.ai_recall("What does Alice prefer?", k=5, temporal_boost=0.3, graph_depth=1)
+
 db.close()
 ```
 
@@ -193,6 +208,14 @@ db.aiCreateSession('s1');
 db.aiAppendMessage('s1', { role: 'user', content: 'Hi' });
 const history = db.aiGetHistory('s1');
 
+// AI v2.1 — Hybrid Memory
+db.aiSetLlmConfig({
+  chat:  { base_url: 'https://api.openai.com/v1', api_key: 'sk-...', model: 'gpt-4o-mini' },
+  embed: { base_url: 'https://api.openai.com/v1', api_key: 'sk-...', model: 'text-embedding-3-small', dimensions: 1536 },
+});
+db.aiAddMemory('Alice prefers dark mode');
+const results = db.aiRecall('What does Alice prefer?', 5, 0.4, 0.6, 0.3, false, undefined, 1);
+
 db.close();
 ```
 
@@ -232,6 +255,14 @@ try (Talon db = new Talon("./data")) {
     db.aiCreateSession("s1", null, null);
     db.aiAppendMessage("s1", Map.of("role", "user", "content", "Hi"));
     var history = db.aiGetHistory("s1", null);
+
+    // AI v2.1 — Hybrid Memory
+    db.aiSetLlmConfig(Map.of(
+        "chat", Map.of("base_url", "https://api.openai.com/v1", "api_key", "sk-...", "model", "gpt-4o-mini"),
+        "embed", Map.of("base_url", "https://api.openai.com/v1", "api_key", "sk-...", "model", "text-embedding-3-small", "dimensions", 1536)
+    ));
+    db.aiAddMemory("Alice prefers dark mode", null, null, false);
+    var results = db.aiRecall("What does Alice prefer?", 5, 0.4, 0.6, 0.3, false, 0, 1);
 }
 ```
 
@@ -264,6 +295,14 @@ var results = db.VectorSearch("embeddings", queryVec, 10, "cosine");
 db.AiCreateSession("s1");
 db.AiAppendMessage("s1", new() { ["role"] = "user", ["content"] = "Hi" });
 var history = db.AiGetHistory("s1");
+
+// AI v2.1 — Hybrid Memory
+db.AiSetLlmConfig(new() {
+    ["chat"] = new() { ["base_url"] = "https://api.openai.com/v1", ["api_key"] = "sk-...", ["model"] = "gpt-4o-mini" },
+    ["embed"] = new() { ["base_url"] = "https://api.openai.com/v1", ["api_key"] = "sk-...", ["model"] = "text-embedding-3-small", ["dimensions"] = 1536 }
+});
+db.AiAddMemory("Alice prefers dark mode");
+var results = db.AiRecall("What does Alice prefer?", 5, 0.4, 0.6, 0.3, false, 0, 1);
 ```
 
 ---
@@ -281,5 +320,6 @@ var history = db.AiGetHistory("s1");
 | GEO | `GeoAdd` | `geo_add` | `geoAdd` | `geoAdd` | `GeoAdd` |
 | Graph | `GraphBFS` | `graph_bfs` | `graphBfs` | `graphBfs` | `GraphBfs` |
 | AI | `AiCreateSession` | `ai_create_session` | `aiCreateSession` | `aiCreateSession` | `AiCreateSession` |
+| AI v2.1 | `AiAddMemory/AiRecall` | `ai_add_memory/ai_recall` | `aiAddMemory/aiRecall` | `aiAddMemory/aiRecall` | `AiAddMemory/AiRecall` |
 
 各语言遵循自身命名惯例：Go PascalCase、Python snake_case、JS/Java camelCase、.NET PascalCase。

@@ -445,6 +445,144 @@ let ai = db.ai()?;
 let ai = db.ai_read()?;
 ```
 
+### Hybrid Memory (v2.1) — 智能记忆 Pipeline
+
+> **v2.1 新增**: 内置 LLM/Embedding 配置 + 全自动 Hybrid Search 管线。
+> 无需外部 embedding 调用，引擎自动完成 embed → 双写 → 混合检索 → LLM 精排 → Graph 推理。
+
+#### LLM / Embedding 配置
+
+```rust
+pub fn configure_llm(&self, config: AiLlmConfig) -> Result<(), Error>
+pub fn get_llm_config(&self) -> Result<Option<AiLlmConfig>, Error>
+pub fn clear_llm_config(&self) -> Result<(), Error>
+```
+
+```rust
+pub struct AiLlmConfig {
+    pub chat: Option<LlmEndpoint>,   // Chat/Completion LLM
+    pub embed: Option<EmbedEndpoint>, // Embedding model
+}
+pub struct LlmEndpoint {
+    pub base_url: String,         // e.g. "https://api.openai.com/v1"
+    pub api_key: Option<String>,
+    pub model: String,            // e.g. "gpt-4o-mini"
+    pub max_retries: u8,          // default 2
+    pub timeout_secs: u32,        // default 60
+}
+pub struct EmbedEndpoint {
+    pub base_url: String,
+    pub api_key: Option<String>,
+    pub model: String,
+    pub dimensions: u32,          // e.g. 1536, 2048
+    pub timeout_secs: u32,
+}
+```
+
+**SDK Examples:**
+```python
+# Python
+db.ai_set_llm_config({
+    "chat": {"base_url": "https://api.openai.com/v1", "api_key": "sk-...", "model": "gpt-4o-mini"},
+    "embed": {"base_url": "https://api.openai.com/v1", "api_key": "sk-...", "model": "text-embedding-3-small", "dimensions": 1536},
+})
+```
+
+#### `add_memory` — 自动 Embedding + 双写
+
+```rust
+pub fn add_memory(
+    &self, content: &str,
+    metadata: BTreeMap<String, String>,
+    ttl_secs: Option<u64>,
+    extract_facts: bool,
+) -> Result<u64, Error>
+```
+
+自动完成：
+1. 调用 Embedding API 生成向量（FNV 哈希缓存）
+2. 写入向量索引（语义搜索）
+3. 写入 FTS 索引（关键词搜索）
+4. 存储元数据到 KV
+5. [可选] `extract_facts=true` → LLM 提取 EDU（结构化事件单元），每个 EDU 独立 embed + 存储 + Graph 写入
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `content` | `&str` | 记忆文本 |
+| `metadata` | `BTreeMap<String, String>` | 自定义 key-value 元数据 |
+| `ttl_secs` | `Option<u64>` | 过期时间（秒），None = 永不过期 |
+| `extract_facts` | `bool` | 是否用 LLM 提取结构化事件（需 chat config） |
+
+#### `recall` — 智能混合召回 Pipeline
+
+```rust
+pub fn recall(
+    &self, query: &str, k: usize,
+    fts_weight: f64, vec_weight: f64,
+    temporal_boost: f64, rerank: bool,
+    rerank_top_k: Option<usize>,
+    graph_depth: usize,
+) -> Result<Vec<serde_json::Value>, Error>
+```
+
+**完整 Pipeline (Phase 1-4):**
+
+```
+Query → Graph Expand → Hybrid(BM25 + Vector) → RRF Fusion → Temporal Decay → LLM Rerank → Top-K
+```
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `query` | `&str` | — | 搜索查询文本 |
+| `k` | `usize` | 10 | 返回结果数量 |
+| `fts_weight` | `f64` | 0.4 | FTS (BM25) 路权重 |
+| `vec_weight` | `f64` | 0.6 | 向量 (Cosine) 路权重 |
+| `temporal_boost` | `f64` | 0.0 | 时间衰减权重（推荐 0.3，0=关闭） |
+| `rerank` | `bool` | false | 启用 LLM Listwise Rerank（需 chat config） |
+| `rerank_top_k` | `Option<usize>` | = k | Rerank 后保留数量 |
+| `graph_depth` | `usize` | 0 | Graph 实体扩展跳数（推荐 1-2，0=关闭） |
+
+**Pipeline 各阶段说明:**
+
+- **Graph Expand (Phase 4):** 从 query 中提取实体（支持中英文），在知识图谱中 BFS N-hop 扩展关联实体，增强查询
+- **Hybrid Search:** 并行 BM25 全文检索 + 向量语义搜索，RRF (Reciprocal Rank Fusion) 融合排序
+- **Temporal Decay:** 时间衰减函数，近期记忆权重更高
+- **LLM Rerank (Phase 3):** Listwise Rerank — 用 LLM 对候选集重排序，显著提升精度
+
+**返回格式:**
+```json
+[
+  {
+    "entry": { "content": "...", "metadata": {...} },
+    "rrf_score": 0.85,
+    "bm25_score": 12.3,
+    "vector_dist": 0.15
+  }
+]
+```
+
+#### `deduplicate_memories` — 记忆去重
+
+```rust
+pub fn deduplicate_memories(&self, threshold: f32) -> Result<usize, Error>
+```
+基于 Embedding 向量余弦相似度去重。`threshold` 推荐 0.05（越小越严格）。返回删除数量。
+
+#### Graph Memory Stats
+
+```rust
+pub fn graph_memory_stats(&self) -> Result<(usize, usize), Error>  // (vertex_count, edge_count)
+```
+
+#### Auto-Summarize
+
+```rust
+pub fn auto_summarize(&self, session_id: &str, opts: SummarizeOptions) -> Result<String, Error>
+pub fn get_context_window_smart(&self, session_id: &str, max_tokens: u32) -> Result<Vec<ContextMessage>, Error>
+```
+
+使用 LLM 自动为对话生成摘要，并用摘要 + 最新消息构建 token-aware 上下文窗口。
+
 ## Best Practices
 
 1. **Session lifecycle**: Use TTL for automatic cleanup of stale sessions
@@ -453,3 +591,7 @@ let ai = db.ai_read()?;
 4. **Tool caching**: Cache expensive API calls with appropriate TTL
 5. **Tracing**: Record all LLM calls for debugging and cost tracking
 6. **Embedding cache**: Hash text content and cache embeddings to reduce API costs
+7. **Hybrid recall**: Use `recall()` with `fts_weight=0.4, vec_weight=0.6, temporal_boost=0.3` as starting point
+8. **Graph depth**: Set `graph_depth=1` for entity-aware recall; max 5 to prevent deep traversal
+9. **LLM Rerank**: Enable `rerank=true` for precision-critical scenarios; costs 1 LLM call per search
+
