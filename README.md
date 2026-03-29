@@ -14,17 +14,41 @@ SQL + KV + TimeSeries + MessageQueue + Vector + Full-Text Search + GEO + Graph
 
 ## Talon Ecosystem
 
+Talon 的公开文档现在统一使用 talon-db 作为核心引擎名称。
+
+- workspace source folder: superclaw-db
+- main docs source package: ../superclaw-db/packages/docs/
+- public-facing docs name: talon-db
+
 Talon 包含以下核心扩展生态：
 
 | Crate | 许可 | 描述 |
 |-------|------|------|
-| **[talon-core](https://github.com/darkmice/talon-core)** | 开源 (MIT) | 8 合 1 基础数据引擎（SQL/KV/向量/时序/图等），零外部依赖。 |
+| **[talon-db / talon-core](https://github.com/darkmice/talon-core)** | 开源 (MIT) | 8 合 1 基础数据引擎（SQL/KV/向量/时序/图等），零外部依赖。 |
 | **[talon-ai](https://github.com/darkmice/talon-ai)** | 商业扩展 | 提供 Session、Memory、上下文、RAG 检索等 AI 原生数据模型支持。 |
 | **[talon-llm](https://github.com/darkmice/talon-llm)** | 开源 (MIT) | 大模型统一网关，支持 20+ Provider，SSE 安全解析及 token 计量。 |
 | **[talon-trace](https://github.com/darkmice/talon-trace)** | 开源 (MIT) | 追踪引擎，记录执行日志与完整上下文，支持 Team → Agent → Span 三级追踪。 |
 | **[talon-sandbox](https://github.com/darkmice/talon-sandbox)** | 开源 (MIT) | 瀑布式高可用安全沙箱引擎（WASM → Deno → Docker），防 SSRF 与 OOM。 |
 | **[talon-evo-core](https://github.com/darkmice/talon-evocore)** | 商业扩展 | Soul 记忆库与模型自进化核心（主动沉淀经验并自我迭代）。 |
 | **[talon-agent](https://github.com/darkmice/talon-agent)** | 开源 (MIT) | 多 Agent 编排调度器，提供 Tool calling、MCP 支持及 Guardrails 双向校验。 |
+
+## Ecosystem Docs
+
+生态文档源码已统一收敛到 superclaw-db 仓库的 packages/docs 目录中维护，以避免生成产物仓库和源码仓库出现双份内容漂移。
+
+当前推荐阅读结构：
+
+- Source package: ../superclaw-db/packages/docs/
+- English overview: ../superclaw-db/packages/docs/ecosystem/overview.md
+- English architecture: ../superclaw-db/packages/docs/ecosystem/architecture.md
+- English repository map: ../superclaw-db/packages/docs/ecosystem/repository-map.md
+- English platform brief: ../superclaw-db/packages/docs/ecosystem/platform-brief.md
+- 中文总览: ../superclaw-db/packages/docs/zh/ecosystem/overview.md
+- 中文架构: ../superclaw-db/packages/docs/zh/ecosystem/architecture.md
+- 中文仓库地图: ../superclaw-db/packages/docs/zh/ecosystem/repository-map.md
+- 中文平台说明: ../superclaw-db/packages/docs/zh/ecosystem/platform-brief.md
+
+如需查看每个仓库的职责、依赖图和典型调用链，请进入 packages/docs/ecosystem/repos/ 与 packages/docs/zh/ecosystem/repos/。
 
 ## AI Coding Skills
 
